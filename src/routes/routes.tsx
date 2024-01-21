@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { adminRoutes } from "./admin.routes";
+import Login from "../pages/Login";
+import { rotesGenerator } from "../utils/routesGenerator";
+import { adminPaths } from "./admin.routes";
 
 const router = createBrowserRouter([
   {
@@ -8,19 +10,23 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
     path: "/admin",
     element: <App />,
-    children: adminRoutes,
+    children: rotesGenerator(adminPaths),
   },
   {
     path: "/faculty",
     element: <App />,
-    children: adminRoutes,
+    children: rotesGenerator(adminPaths),
   },
   {
     path: "/student",
     element: <App />,
-    children: adminRoutes,
+    children: rotesGenerator(adminPaths),
   },
 ]);
 
