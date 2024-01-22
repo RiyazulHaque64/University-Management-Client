@@ -6,7 +6,7 @@ import { adminPaths } from "./admin.routes";
 
 const router = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     element: <App />,
   },
   {

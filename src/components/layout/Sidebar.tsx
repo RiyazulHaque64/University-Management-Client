@@ -1,5 +1,7 @@
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { adminPaths } from "../../routes/admin.routes";
 import { navbarGenerator } from "../../utils/navbarGenerator";
 
@@ -10,9 +12,9 @@ const userRole = {
 };
 
 const Sidebar = () => {
-  const role = "admin";
+  const user = useSelector(selectCurrentUser);
   let navbarItems;
-  switch (role) {
+  switch (user!.role) {
     case userRole.ADMIN:
       navbarItems = navbarGenerator(adminPaths, "admin");
       break;
