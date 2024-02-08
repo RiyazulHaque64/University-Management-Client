@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import { ReactNode } from "react";
 import {
   FieldValues,
@@ -8,14 +9,21 @@ import {
 
 type TPHFromProps = {
   onSubmit: SubmitHandler<FieldValues>;
+  resolver?: any;
   children: ReactNode;
 };
-const PHForm = ({ onSubmit, children }: TPHFromProps) => {
-  const methods = useForm();
-  console.log(methods);
+const PHForm = ({ onSubmit, resolver, children }: TPHFromProps) => {
+  const formConfig: { resolver?: any } = {};
+  console.log(formConfig);
+  if (resolver) {
+    formConfig["resolver"] = resolver;
+  }
+  const methods = useForm(formConfig);
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
+      <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
+        {children}
+      </Form>
     </FormProvider>
   );
 };

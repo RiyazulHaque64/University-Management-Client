@@ -15,7 +15,6 @@ const Login = () => {
   const dispatch = useAppDispatch();
 
   const handleLogin = async (data: FieldValues) => {
-    console.log(data);
     const toastId = toast.loading("Login in...");
     try {
       const userInfo = {
