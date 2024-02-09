@@ -14,7 +14,6 @@ type TPHFromProps = {
 };
 const PHForm = ({ onSubmit, resolver, children }: TPHFromProps) => {
   const formConfig: { resolver?: any } = {};
-  console.log(formConfig);
   if (resolver) {
     formConfig["resolver"] = resolver;
   }
