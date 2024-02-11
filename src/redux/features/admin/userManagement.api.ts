@@ -1,7 +1,28 @@
+import { TStudent } from "../../../types/userManagement.type";
 import { baseApi } from "../../api/baseApi";
+import { TQueryParam, TReduxResponse } from "./../../../types/global";
 
 const userManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getStudents: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/students",
+          method: "GET",
+          params: params,
+        };
+      },
+      transformResponse: (response: TReduxResponse<TStudent[]>) => ({
+        data: response.data,
+        meta: response.meta,
+      }),
+    }),
     createStudent: builder.mutation({
       query: (data) => ({
         url: "/users/create-student",
@@ -12,4 +33,5 @@ const userManagementApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateStudentMutation } = userManagementApi;
+export const { useGetStudentsQuery, useCreateStudentMutation } =
+  userManagementApi;

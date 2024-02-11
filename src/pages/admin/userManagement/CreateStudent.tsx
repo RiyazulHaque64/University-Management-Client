@@ -1,16 +1,18 @@
-import { Button, Col, Divider, Flex, Row } from "antd";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Button, Col, Divider, Flex, Form, Input, Row } from "antd";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
-import PHDatePicker from "../../components/form/PHDatePicker";
-import PHForm from "../../components/form/PHForm";
-import PHInput from "../../components/form/PHInput";
-import PHSelect from "../../components/form/PHSelect";
-import { bloodGroupOptions, genderOptions } from "../../const/user";
+import PHDatePicker from "../../../components/form/PHDatePicker";
+import PHForm from "../../../components/form/PHForm";
+import PHInput from "../../../components/form/PHInput";
+import PHSelect from "../../../components/form/PHSelect";
+import { bloodGroupOptions, genderOptions } from "../../../const/user";
 import {
   useGetAcademicDepartmentQuery,
   useGetAcademicSemesterQuery,
-} from "../../redux/features/admin/academicManagementApi";
-import { useCreateStudentMutation } from "../../redux/features/admin/userManagement.api";
+} from "../../../redux/features/admin/academicManagementApi";
+import { useCreateStudentMutation } from "../../../redux/features/admin/userManagement.api";
+import { TResponse } from "../../../types/global";
+import { TStudent } from "../../../types/userManagement.type";
 
 // {
 //     "password": "abc123",
@@ -98,10 +100,12 @@ const CreateStudent = () => {
     const studentData = {
       student: data,
     };
+    console.log(data);
     const formData = new FormData();
     formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.profileImg);
     try {
-      const res = await addStudent(formData);
+      const res = (await addStudent(formData)) as TResponse<TStudent>;
       if (res?.error) {
         toast.error(res?.error?.data?.message, { id: toastId });
       } else {
@@ -136,6 +140,21 @@ const CreateStudent = () => {
               name="bloodGroup"
               label="Blood Group"
               options={bloodGroupOptions}
+            />
+          </Col>
+          <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Controller
+              name="profileImg"
+              render={({ field: { onChange, value, ...field } }) => (
+                <Form.Item label="Profile Image">
+                  <Input
+                    {...field}
+                    value={value?.fileName}
+                    onChange={(e) => onChange(e.target.files?.[0])}
+                    type="file"
+                  />
+                </Form.Item>
+              )}
             />
           </Col>
           <Divider>Contact Information</Divider>
@@ -248,7 +267,9 @@ const CreateStudent = () => {
             />
           </Col>
         </Row>
-        <Button htmlType="submit">Create</Button>
+        <Button disabled={addStudentLoading} htmlType="submit">
+          Create
+        </Button>
       </PHForm>
     </Flex>
   );
