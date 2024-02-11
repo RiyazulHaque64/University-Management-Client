@@ -14,42 +14,6 @@ import { useCreateStudentMutation } from "../../../redux/features/admin/userMana
 import { TResponse } from "../../../types/global";
 import { TStudent } from "../../../types/userManagement.type";
 
-// {
-//     "password": "abc123",
-//     "student": {
-//         "name": {
-//             "firstName": "John",
-//             "middleName": "Doe",
-//             "lastName": "Smith"
-//         },
-//         "gender": "male",
-//         "email": "john.doe6@example.com",
-//         "dateOfBirth": "1990-01-01",
-//         "contactNo": "+9876543210",
-//         "emergencyContactNo": "+9876543210",
-//         "bloodGroup": "A+",
-//         "presentAddress": "123 Main Street, Cityville",
-//         "permanentAddress": "456 Long Avenue, Townsville",
-//         "guardian": {
-//             "fatherName": "Robert Doe",
-//             "fatherOccupation": "Engineer",
-//             "fatherContactNo": "+1234567890",
-//             "motherName": "Alice Doe",
-//             "motherOccupation": "Doctor",
-//             "motherContactNo": "+9876543210"
-//         },
-//         "localGuardian": {
-//             "name": "Lucy Smith",
-//             "contactNo": "+9876543210",
-//             "address": "789 Short Street, Villagetown",
-//             "occupation": "Teacher"
-//         },
-//         "admissionSemester": "65c24022e00bea4ade92fcdb",
-//         "academicDepartment": "65c23a66102fd7f416f92871",
-//         "isActive": "active"
-//     }
-// }
-
 const studentDefaultValue = {
   name: {
     firstName: "John",

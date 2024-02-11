@@ -1,10 +1,12 @@
 import { ReactNode } from "react";
 
-export type TNavItem = {
-  key: string;
-  label: ReactNode;
-  children?: TNavItem[];
-};
+export type TNavItem =
+  | {
+      key: string;
+      label: ReactNode;
+      children?: TNavItem[];
+    }
+  | undefined;
 
 export type TRoute = {
   path: string;
