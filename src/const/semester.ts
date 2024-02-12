@@ -23,3 +23,12 @@ export const monthOptions = [
   "November",
   "December",
 ].map((month) => ({ value: month, label: month }));
+
+export const semesterRegistrationStatusOptions = [
+  "UPCOMING",
+  "ONGOING",
+  "ENDED",
+].map((status) => ({
+  value: status,
+  label: status.charAt(0) + status.slice(1).toLowerCase(),
+}));
