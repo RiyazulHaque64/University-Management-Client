@@ -11,7 +11,7 @@ export const navbarGenerator = (items: TItem[], role: string) => {
     }
     if (item.children) {
       acc.push({
-        key: item.name,
+        key: item.name as string,
         label: item.name,
         children: item.children.map((child) => {
           if (child.name) {

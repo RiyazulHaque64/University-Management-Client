@@ -10,7 +10,7 @@ export type TUser = {
 
 type TAuthState = {
   user: TUser | null;
-  token: null | object;
+  token: null | string;
 };
 const initialState: TAuthState = {
   user: null,
